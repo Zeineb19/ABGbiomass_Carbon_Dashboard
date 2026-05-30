@@ -52,7 +52,19 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
+# Resolve data/ folder robustly — works locally and on Streamlit Cloud
+def _find_data_dir():
+    candidates = [
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "data"),
+        os.path.join(os.getcwd(), "data"),
+        "/mount/src/abgbiomass_carbon_dashboard/data",
+    ]
+    for c in candidates:
+        if os.path.isdir(c):
+            return c
+    return candidates[0]  # fallback — load_csv will return None for missing files
+
+DATA_DIR = _find_data_dir()
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CSS
@@ -109,9 +121,13 @@ MODEL_COLORS = {
 @st.cache_data
 def load_csv(filename):
     path = os.path.join(DATA_DIR, filename)
-    if not os.path.exists(path):
+    if not os.path.exists(path) or os.path.getsize(path) == 0:
         return None
-    return pd.read_csv(path)
+    try:
+        df = pd.read_csv(path)
+        return df if not df.empty else None
+    except Exception:
+        return None
 
 @st.cache_data
 def load_spectral_summary():

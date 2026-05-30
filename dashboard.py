@@ -130,12 +130,10 @@ def load_lidar():
     return df
 
 def spectral_test(model, variant):
-    """Load test-set predictions for a spectral model."""
     fname = f"spectral_{model.lower()}_{variant}_test_predictions.csv"
     return load_csv(fname)
 
 def spectral_full(model, variant):
-    """Load full spatial predictions for a spectral model."""
     fname = f"spectral_{model.lower()}_{variant}_full_predictions.csv"
     return load_csv(fname)
 
@@ -218,12 +216,10 @@ def comparison_bar_from_summary(df_summary, metric, title, unit=""):
             text=[f"{row[metric]:.3f}{unit}"], textposition="outside",
         ))
     fig.update_layout(**PL, title=title, height=360,
-                      yaxis_title=metric, showlegend=False,
-                      bargap=0.3)
+                      yaxis_title=metric, showlegend=False, bargap=0.3)
     return fig
 
 def chm_delta_table(df_summary):
-    """Show Δ per model when CHM is added."""
     rows = []
     for model in df_summary["model"].unique():
         sub = df_summary[df_summary["model"] == model]
@@ -231,12 +227,12 @@ def chm_delta_table(df_summary):
         no_chm = sub[sub["variant"].str.contains("without", case=False)]
         if len(chm) and len(no_chm):
             rows.append({
-                "Model":        model,
-                "R² w/o CHM":  no_chm["R2"].values[0],
-                "R² with CHM": chm["R2"].values[0],
-                "ΔR²":         round(chm["R2"].values[0] - no_chm["R2"].values[0], 4),
+                "Model":         model,
+                "R² w/o CHM":   no_chm["R2"].values[0],
+                "R² with CHM":  chm["R2"].values[0],
+                "ΔR²":          round(chm["R2"].values[0] - no_chm["R2"].values[0], 4),
                 "RMSE w/o CHM": no_chm["RMSE"].values[0],
-                "RMSE with CHM": chm["RMSE"].values[0],
+                "RMSE with CHM":chm["RMSE"].values[0],
                 "ΔRMSE":        round(chm["RMSE"].values[0] - no_chm["RMSE"].values[0], 4),
             })
     return pd.DataFrame(rows)
@@ -281,7 +277,6 @@ if section == "🛰 Spectral Models":
                  "Please run the spectral notebook and place output files in `/data/`.")
         st.stop()
 
-    # ── Tabs
     detail_tab, compare_tab, chm_tab, map_tab = st.tabs([
         "📊 Model Detail", "⚖ Model Comparison", "🌿 CHM Impact", "🗺 Spatial Map"
     ])
@@ -317,8 +312,6 @@ if section == "🛰 Spectral Models":
 
     with compare_tab:
         st.markdown("#### All Models — Side-by-Side Metrics")
-
-        # Summary metrics table
         st.dataframe(
             summary.sort_values("R2", ascending=False)
                    .reset_index(drop=True)
@@ -342,14 +335,12 @@ if section == "🛰 Spectral Models":
                 comparison_bar_from_summary(summary, "Bias", "Bias — All Models", " Mg/ha"),
                 use_container_width=True)
 
-        # Overlay scatter — all 6 models
         st.markdown("#### Observed vs Predicted — All Models Overlay")
         fig_all = go.Figure()
         for model in ["MLP", "XGBoost", "CatBoost"]:
             for variant in ["with_chm", "without_chm"]:
                 df_t = spectral_test(model, variant)
                 if df_t is not None:
-                    dash = "solid" if "with" in variant else "dot"
                     fig_all.add_trace(go.Scatter(
                         x=df_t["y_true"], y=df_t["y_pred"], mode="markers",
                         marker=dict(size=3, color=MODEL_COLORS[model], opacity=0.3,
@@ -371,7 +362,6 @@ if section == "🛰 Spectral Models":
         if not delta_df.empty:
             st.dataframe(delta_df.set_index("Model"), use_container_width=True)
 
-            # ΔR² bar chart
             fig_delta = go.Figure()
             for _, row in delta_df.iterrows():
                 color = MODEL_COLORS.get(row["Model"], "#64748b")
@@ -386,7 +376,6 @@ if section == "🛰 Spectral Models":
                                     yaxis_title="ΔR²", height=340, showlegend=False)
             st.plotly_chart(fig_delta, use_container_width=True)
 
-            # Side-by-side R² bars per model
             fig_side = go.Figure()
             for _, row in delta_df.iterrows():
                 color = MODEL_COLORS.get(row["Model"], "#64748b")
@@ -430,7 +419,6 @@ if section == "🛰 Spectral Models":
             with c1: st.plotly_chart(fig_obs,  use_container_width=True)
             with c2: st.plotly_chart(fig_pred, use_container_width=True)
 
-            # Difference map
             df_full = df_full.copy()
             df_full["diff"] = df_full["y_pred"] - df_full["y_true"]
             fig_diff = go.Figure(go.Scattergl(
@@ -530,7 +518,6 @@ elif section == "🔮 Embedding Models":
             fig_bias.update_layout(**PL, title="Bias — Embedding Models", height=340, yaxis_title="Bias (Mg/ha)")
             st.plotly_chart(fig_bias, use_container_width=True)
 
-        # Overlay scatter
         st.markdown("#### Observed vs Predicted — All Embedding Models")
         fig_all = go.Figure()
         for model in ["MLP", "XGBoost", "CatBoost"]:
@@ -556,7 +543,7 @@ elif section == "🔮 Embedding Models":
         df_full   = embedding_full(map_model)
 
         if df_full is None:
-            st.warning(f"⚠ Full prediction file not found. Falling back to test-set points.")
+            st.warning("⚠ Full prediction file not found. Falling back to test-set points.")
             df_full = embedding_test(map_model)
 
         if df_full is not None:

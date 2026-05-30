@@ -4,7 +4,7 @@ ForestBiomass Intelligence Dashboard
 Loads real prediction CSVs from the /data/ folder (same repo).
 
 Expected folder structure:
-  data/
+  
     spectral_xgboost_with_chm_test_predictions.csv
     spectral_xgboost_without_chm_test_predictions.csv
     spectral_catboost_with_chm_test_predictions.csv

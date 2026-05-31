@@ -92,13 +92,20 @@ h2{color:var(--accent2)!important;}
 h3{color:var(--accent1)!important;font-size:1rem!important;}
 [data-testid="metric-container"]{background:var(--panel)!important;border:1px solid var(--border)!important;border-radius:10px!important;padding:14px 18px!important;}
 [data-testid="metric-container"] label{color:var(--muted)!important;font-size:.75rem!important;text-transform:uppercase;letter-spacing:1px;}
-[data-testid="metric-container"] [data-testid="stMetricValue"]{color:var(--accent1)!important;font-family:'Space Mono',monospace!important;}
+[data-testid="metric-container"] [data-testid="stMetricValue"]{color:#ffffff!important;font-family:'Space Mono',monospace!important;font-size:1.6rem!important;}
+[data-testid="metric-container"] label{color:#94a3b8!important;font-size:.75rem!important;text-transform:uppercase;letter-spacing:1px;}
 [data-baseweb="tab-list"]{background:var(--panel)!important;border-radius:8px;padding:4px;}
 [data-baseweb="tab"]{color:var(--muted)!important;font-family:'Space Mono',monospace!important;font-size:.8rem!important;}
 [aria-selected="true"][data-baseweb="tab"]{color:var(--accent1)!important;background:var(--bg)!important;border-radius:6px!important;}
 [data-baseweb="select"]>div{background:var(--panel)!important;border-color:var(--border)!important;}
 [data-testid="stExpander"]{background:var(--panel)!important;border:1px solid var(--border)!important;border-radius:8px!important;}
 [data-testid="stInfo"]{background:rgba(45,212,191,.08)!important;border-left:3px solid var(--accent1)!important;}
+[data-baseweb="select"] [data-testid="stMarkdownContainer"] p,
+[data-baseweb="select"] span,
+[data-baseweb="select"] div,
+div[data-baseweb="select"] > div > div {color:#ffffff!important;}
+[data-baseweb="popover"] li, [data-baseweb="menu"] li {color:#ffffff!important;background:var(--panel)!important;}
+[data-baseweb="popover"] li:hover {background:var(--border)!important;}
 hr{border-color:var(--border)!important;}
 </style>
 """, unsafe_allow_html=True)
@@ -113,6 +120,7 @@ PL = dict(
     font=dict(family="DM Sans", color="#e2e8f0", size=12),
     margin=dict(l=40, r=20, t=50, b=40),
     colorway=["#2dd4bf","#86efac","#fb923c","#a78bfa","#38bdf8","#f472b6"],
+    font=dict(family="DM Sans", color="#ffffff", size=12),  # was #e2e8f0,
 )
 
 MODEL_COLORS = {

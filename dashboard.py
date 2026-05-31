@@ -78,28 +78,57 @@ DATA_DIR = _find_data_dir()
 # ─────────────────────────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;600;700&display=swap');
-:root {
-  --bg:#0b1117; --panel:#131c26; --accent1:#2dd4bf; --accent2:#86efac;
-  --accent3:#fb923c; --accent4:#a78bfa; --text:#e2e8f0; --muted:#64748b; --border:#1e293b;
+
+/* ===== SELECTBOX / DROPDOWN TEXT ===== */
+[data-baseweb="select"] * {
+    color: white !important;
 }
-html,body,[data-testid="stAppViewContainer"]{background-color:var(--bg)!important;color:var(--text)!important;font-family:'DM Sans',sans-serif;}
-[data-testid="stSidebar"]{background:var(--panel)!important;border-right:1px solid var(--border);}
-[data-testid="stSidebar"] *{color:var(--text)!important;}
-h1,h2,h3,h4{font-family:'Space Mono',monospace!important;}
-h1{color:var(--accent1)!important;letter-spacing:-1px;}
-h2{color:var(--accent2)!important;}
-h3{color:var(--accent1)!important;font-size:1rem!important;}
-[data-testid="metric-container"]{background:var(--panel)!important;border:1px solid var(--border)!important;border-radius:10px!important;padding:14px 18px!important;}
-[data-testid="metric-container"] label{color:var(--muted)!important;font-size:.75rem!important;text-transform:uppercase;letter-spacing:1px;}
-[data-testid="metric-container"] [data-testid="stMetricValue"]{color:var(--accent1)!important;font-family:'Space Mono',monospace!important;}
-[data-baseweb="tab-list"]{background:var(--panel)!important;border-radius:8px;padding:4px;}
-[data-baseweb="tab"]{color:var(--muted)!important;font-family:'Space Mono',monospace!important;font-size:.8rem!important;}
-[aria-selected="true"][data-baseweb="tab"]{color:var(--accent1)!important;background:var(--bg)!important;border-radius:6px!important;}
-[data-baseweb="select"]>div{background:var(--panel)!important;border-color:var(--border)!important;}
-[data-testid="stExpander"]{background:var(--panel)!important;border:1px solid var(--border)!important;border-radius:8px!important;}
-[data-testid="stInfo"]{background:rgba(45,212,191,.08)!important;border-left:3px solid var(--accent1)!important;}
-hr{border-color:var(--border)!important;}
+
+[data-baseweb="select"] > div {
+    background-color: var(--panel) !important;
+    border: 1px solid var(--border) !important;
+    color: white !important;
+}
+
+/* dropdown menu options */
+div[role="listbox"] * {
+    color: white !important;
+    background-color: var(--panel) !important;
+}
+
+/* selected value inside selectbox */
+[data-baseweb="select"] span {
+    color: white !important;
+}
+
+/* ===== DATAFRAME / TABLE TEXT ===== */
+[data-testid="stDataFrame"] {
+    color: white !important;
+}
+
+[data-testid="stDataFrame"] * {
+    color: white !important;
+}
+
+/* pandas summary tables */
+[data-testid="stTable"] {
+    color: white !important;
+}
+
+[data-testid="stTable"] * {
+    color: white !important;
+}
+
+/* dataframe background */
+[data-testid="stDataFrame"] div {
+    background-color: var(--panel) !important;
+}
+
+/* ===== EXPANDER CONTENT ===== */
+[data-testid="stExpander"] * {
+    color: white !important;
+}
+
 </style>
 """, unsafe_allow_html=True)
 

@@ -117,10 +117,10 @@ PL = dict(
     template="plotly_dark",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(11,17,23,0.6)",
-    font=dict(family="DM Sans", color="#e2e8f0", size=12),
+    font=dict(family="DM Sans", color="#ffffff", size=12),
     margin=dict(l=40, r=20, t=50, b=40),
     colorway=["#2dd4bf","#86efac","#fb923c","#a78bfa","#38bdf8","#f472b6"],
-    font=dict(family="DM Sans", color="#ffffff", size=12),  # was #e2e8f0,
+    
 )
 
 MODEL_COLORS = {

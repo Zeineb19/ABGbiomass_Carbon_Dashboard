@@ -177,6 +177,17 @@ def load_lidar():
         # Normalise coordinate column names (CSV uses crown_x/crown_y)
         if "crown_x" in df.columns:
             df = df.rename(columns={"crown_x": "tree_lon", "crown_y": "tree_lat"})
+        # Convert RD New (EPSG:28992, meters) → WGS84 (degrees) if needed
+        # RD New x values are ~0–280000, WGS84 lon for NL is ~3–7
+        if "tree_lon" in df.columns and df["tree_lon"].abs().max() > 1000:
+            try:
+                from pyproj import Transformer
+                tr = Transformer.from_crs("EPSG:28992", "EPSG:4326", always_xy=True)
+                lon, lat = tr.transform(df["tree_lon"].values, df["tree_lat"].values)
+                df["tree_lon"] = lon.astype("float32")
+                df["tree_lat"] = lat.astype("float32")
+            except Exception as e:
+                st.warning(f"⚠ Could not convert coordinates to WGS84: {e}")
         df["height_range_m"] = (df["height_p95_m"] - df["height_p25_m"]).astype("float32")
         df["tile_label"] = df["tile"].map({1:"Tile 1", 2:"Tile 2", 3:"Tile 3"})
     return df
@@ -825,4 +836,4 @@ elif section == "📡 LiDAR Analysis":
                 title=f"Individual Trees — {FEAT_LABELS.get(map_col, map_col)}",
                 xaxis_title="Longitude", yaxis_title="Latitude",
             )
-        st.plotly_chart(fig_map, use_container_width=True) , 
+        st.plotly_chart(fig_map, use_container_width=True) ,

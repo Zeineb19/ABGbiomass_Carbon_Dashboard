@@ -836,4 +836,4 @@ elif section == "📡 LiDAR Analysis":
                 title=f"Individual Trees — {FEAT_LABELS.get(map_col, map_col)}",
                 xaxis_title="Longitude", yaxis_title="Latitude",
             )
-        st.plotly_chart(fig_map, use_container_width=True) ,
+        st.plotly_chart(fig_map, use_container_width=True) 

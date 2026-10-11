@@ -120,6 +120,4 @@ streamlit run app.py
 
 **Zeineb** · [GitHub](https://github.com/Zeineb19)
 
-## 📄 License
 
-Add a license of your choice (e.g. MIT).

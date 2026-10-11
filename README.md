@@ -62,7 +62,7 @@ Tree-level structural attributes derived from **LiDAR point-cloud segmentation**
 
 | Spectral Models | Embedding Models |
 |---|---|
-| ![Spectral performance](docs/spectral_performance.png) | ![Embedding performance](docs/embedding_performance.png) |
+| ![Spectral performance](docs/spectral_Performance.png) | ![Embedding performance](docs/embedding_performance.png) |
 
 | CHM impact | Difference map |
 |---|---|

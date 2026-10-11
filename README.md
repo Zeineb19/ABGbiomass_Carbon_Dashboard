@@ -66,7 +66,7 @@ Tree-level structural attributes derived from **LiDAR point-cloud segmentation**
 
 | CHM impact | Difference map |
 |---|---|
-| ![Delta R2](docs/delta_r2_chm.png) | ![Difference map](docs/difference_map.png) |
+| ![Delta R2](docs/delta_r2_chm.png) | ![Difference map](docs/diffrence_map.png) |
 
 | LiDAR overview | Tree spatial map |
 |---|---|

@@ -97,9 +97,10 @@ streamlit run app.py
 ## 🧰 Tech Stack
 
 - **Dashboard:** Streamlit, Plotly
-- **Modelling:** scikit-learn, XGBoost, CatBoost, PyTorch/MLP
+- **Modelling:** scikit-learn, XGBoost, CatBoost, PyTorch/MLP,OpenCV
 - **Data:** ESA CCI Biomass, GEDI, Google Satellite Embeddings, LiDAR point clouds
 - **Language:** Python
+- **Cloud preprocessing :**Cloud Compare ,Qgis/Arcgis,
 
 ## 📊 Method Summary
 

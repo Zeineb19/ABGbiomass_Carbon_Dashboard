@@ -100,7 +100,7 @@ streamlit run app.py
 - **Modelling:** scikit-learn, XGBoost, CatBoost, PyTorch/MLP,OpenCV
 - **Data:** ESA CCI Biomass, GEDI, Google Satellite Embeddings, LiDAR point clouds
 - **Language:** Python
-- **Cloud preprocessing :**Cloud Compare ,Qgis/Arcgis,
+- **Cloud preprocessing :** Cloud Compare ,Qgis/Arcgis,
 
 ## 📊 Method Summary
 
